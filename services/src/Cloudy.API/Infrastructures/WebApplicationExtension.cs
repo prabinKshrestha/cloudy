@@ -14,6 +14,14 @@ public static class WebApplicationExtensions
             .WithOpenApi();
     }
 
+    public static RouteGroupBuilder MapGroup(this WebApplication app, string groupName)
+    {
+        return app
+            .MapGroup($"/api/{groupName.ToLower()}")
+            .WithTags(groupName)
+            .WithOpenApi();
+    }
+
     public static WebApplication MapEndpoints(this WebApplication app)
     {
         var endpointGroupType = typeof(EndpointGroupBase);
