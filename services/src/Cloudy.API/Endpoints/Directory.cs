@@ -8,7 +8,7 @@ public class Directories : EndpointGroupBase
 {
     public override void Map(WebApplication app)
     {
-        app.MapGroup(this)
+        app.CustomMapGroup(this)
             .MapGet(GetDirectoriesByParentId, "{directoryId}/children")
             .MapPost(CreateDirectory)
             .MapPut(UpdateDirectory, "{directoryId}");

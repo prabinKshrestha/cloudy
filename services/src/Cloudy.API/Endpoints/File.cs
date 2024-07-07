@@ -1,19 +1,21 @@
 using Cloudy.Application.Files.Commands.CreateFile;
+using Cloudy.Application.Files.Commands.DeleteFile;
 using Cloudy.Application.Files.Commands.UpdateFile;
 using Cloudy.Application.Files.Queries;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Cloudy.Api.Endpoints;
 
-public class File : EndpointGroupBase
+public class Files : EndpointGroupBase
 {
     public override void Map(WebApplication app)
     {
-        app.MapGroup(this)
+        app.CustomMapGroup(this)
             .MapPost(CreateFile)
             .MapDelete(DeleteFiles)
             .MapPut(UpdateFile, "{fileId}");
 
-        app.MapGroup("directories")
+        app.CustomMapGroup("directories")
             .MapGet(GetFilesByDirectoryId, "{directoryId}/files");
     }
 
@@ -29,7 +31,7 @@ public class File : EndpointGroupBase
         return Results.NoContent();
     }
 
-    public async Task<IResult> DeleteFiles(ISender sender, DeleteFileCommand command)
+    public async Task<IResult> DeleteFiles(ISender sender, [FromBody] DeleteFileCommand command)
     {
         await sender.Send(command);
         return Results.NoContent();

@@ -4,17 +4,13 @@ namespace Cloudy.API.Infrastructures;
 
 public static class WebApplicationExtensions
 {
-    public static RouteGroupBuilder MapGroup(this WebApplication app, EndpointGroupBase group)
+    public static RouteGroupBuilder CustomMapGroup(this WebApplication app, EndpointGroupBase group)
     {
         var groupName = group.GetType().Name;
-
-        return app
-            .MapGroup($"/api/{groupName.ToLower()}")
-            .WithTags(groupName)
-            .WithOpenApi();
+        return app.CustomMapGroup(groupName.ToLower());
     }
 
-    public static RouteGroupBuilder MapGroup(this WebApplication app, string groupName)
+    public static RouteGroupBuilder CustomMapGroup(this WebApplication app, string groupName)
     {
         return app
             .MapGroup($"/api/{groupName.ToLower()}")

@@ -14,10 +14,11 @@ public static class DependencyInjection
         services.AddSingleton(TimeProvider.System);
         
         services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
-        
-        services.AddDbContext<CloudyDbContext>(options => {
-            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection"));
-        });
+
+        services.AddDbContext<CloudyDbContext>((sp, options) => options
+            .UseNpgsql(configuration.GetConnectionString("DefaultConnection"))
+            .AddInterceptors(sp.GetServices<ISaveChangesInterceptor>())
+        );
 
         services.AddScoped<ICloudyDbContext>(provider => provider.GetRequiredService<CloudyDbContext>());
 
