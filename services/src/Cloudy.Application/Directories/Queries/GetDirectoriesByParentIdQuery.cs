@@ -1,7 +1,8 @@
 using Cloudy.Application.Common.Interfaces;
-using Cloudy.Domain.Entities;
 
 namespace Cloudy.Application.Directories.Queries;
+
+public record DirectoryDto(Guid Id, string Name);
 
 public record GetDirectoriesByParentIdQuery(Guid DirectoryId) : IRequest<List<DirectoryDto>>;
 
