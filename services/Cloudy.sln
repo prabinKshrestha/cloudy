@@ -5,21 +5,20 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{64CF95D5-B056-4AE1-BDBA-6BF5690B751E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloudy.Domain", "src\Cloudy.Domain\Cloudy.Domain.csproj", "{E83297AF-D1CD-4613-A244-47B14972AABA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloudy.Domain", "src\Cloudy.Domain\Cloudy.Domain.csproj", "{E83297AF-D1CD-4613-A244-47B14972AABA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloudy.Application", "src\Cloudy.Application\Cloudy.Application.csproj", "{98A728CE-E208-4CDD-8298-17BC20735AEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloudy.Application", "src\Cloudy.Application\Cloudy.Application.csproj", "{98A728CE-E208-4CDD-8298-17BC20735AEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloudy.Infrastructure", "src\Cloudy.Infrastructure\Cloudy.Infrastructure.csproj", "{34187F4B-0218-4737-83D1-F7FF7757B140}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloudy.Infrastructure", "src\Cloudy.Infrastructure\Cloudy.Infrastructure.csproj", "{34187F4B-0218-4737-83D1-F7FF7757B140}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloudy.API", "src\Cloudy.API\Cloudy.API.csproj", "{78BDDA9F-0C54-43E5-ADC4-2ECFA2177349}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cloudy.API", "src\Cloudy.API\Cloudy.API.csproj", "{78BDDA9F-0C54-43E5-ADC4-2ECFA2177349}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cloudy.Client.CLI", "src\Cloudy.Client.CLI\Cloudy.Client.CLI.csproj", "{49B12713-0BEC-416B-80D5-18692251B1F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E83297AF-D1CD-4613-A244-47B14972AABA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -38,11 +37,22 @@ Global
 		{78BDDA9F-0C54-43E5-ADC4-2ECFA2177349}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78BDDA9F-0C54-43E5-ADC4-2ECFA2177349}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78BDDA9F-0C54-43E5-ADC4-2ECFA2177349}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49B12713-0BEC-416B-80D5-18692251B1F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49B12713-0BEC-416B-80D5-18692251B1F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49B12713-0BEC-416B-80D5-18692251B1F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49B12713-0BEC-416B-80D5-18692251B1F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{E83297AF-D1CD-4613-A244-47B14972AABA} = {64CF95D5-B056-4AE1-BDBA-6BF5690B751E}
 		{98A728CE-E208-4CDD-8298-17BC20735AEF} = {64CF95D5-B056-4AE1-BDBA-6BF5690B751E}
 		{34187F4B-0218-4737-83D1-F7FF7757B140} = {64CF95D5-B056-4AE1-BDBA-6BF5690B751E}
 		{78BDDA9F-0C54-43E5-ADC4-2ECFA2177349} = {64CF95D5-B056-4AE1-BDBA-6BF5690B751E}
+		{49B12713-0BEC-416B-80D5-18692251B1F5} = {64CF95D5-B056-4AE1-BDBA-6BF5690B751E}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1F1FEB2C-53D0-40CF-A6D6-B775AD09DA6A}
 	EndGlobalSection
 EndGlobal
