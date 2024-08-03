@@ -1,51 +1,67 @@
 ﻿using Microsoft.Extensions.Options;
+using Spectre.Console;
 using Spectre.Console.Cli;
+using System.Text.Json;
 
 namespace Cloudy.Client.CLI.Commands.Accounts;
 
-public class ListAccountCommand(IOptions<AppSettings.AppSettings> appSettings) : Command<ListAccountCommand.Settings>
+public class ListAccountCommand(IOptions<AppSettings.AppSettings> appSettings)
+    : AsyncCommand<ListAccountCommand.Settings>
 {
     private readonly IOptions<AppSettings.AppSettings> _appSettings = appSettings;
+    private readonly HttpClient _httpClient = new();
 
     public class Settings : CommandSettings
+    {}
+
+    public override async Task<int> ExecuteAsync(CommandContext context, Settings settings)
     {
-    }
-
-    public override int Execute(CommandContext context, Settings settings)
-    {
-        Console.WriteLine(_appSettings.Value.ApiBaseUrl);
-
-        // Replace this with your actual logic to fetch accounts
-        var accounts = GetAccounts();
-
-        if (accounts.Count == 0)
+        try
         {
-            Console.WriteLine("No accounts found.");
-        }
-        else
-        {
-            foreach (var account in accounts)
+            var apiUrl = $"{_appSettings.Value.ApiBaseUrl}/api/accounts";
+            var response = await _httpClient.GetAsync(apiUrl);
+
+            if (!response.IsSuccessStatusCode)
             {
-                Console.WriteLine($"Account Name: {account.Name}");
+                Console.WriteLine("Failed to retrieve accounts.");
+                return -1;
             }
+
+            var jsonResponse = await response.Content.ReadAsStringAsync();
+            var accounts = JsonSerializer.Deserialize<List<AccountUserDto>>(jsonResponse, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            if (accounts.Count == 0)
+            {
+                Console.WriteLine("No accounts found.");
+            }
+            else
+            {
+                var table = new Table();
+                table.AddColumn("Id");
+                table.AddColumn("Account Name");
+                table.AddColumn("User Email");
+                
+                foreach (var account in accounts)
+                {
+                    table.AddRow(account.Id, account.AccountName, account.UserEmail);
+                }
+
+                AnsiConsole.Write(table);
+            }
+
+            return 0;
         }
-
-        return 0;
-    }
-
-    private List<Account> GetAccounts()
-    {
-        // Placeholder implementation
-        return new List<Account>
+        catch (Exception ex)
         {
-            new Account { Name = "Account1" },
-            new Account { Name = "Account2" },
-            new Account { Name = "Account3" },
-        };
+            Console.WriteLine($"An error occurred: {ex.Message} {ex.StackTrace}");
+            return -1;
+        }
     }
-}
 
-public class Account
-{
-    public string Name { get; set; }
+    public class AccountUserDto
+    {
+        public required string Id { get; set; }
+        public required string AccountName { get; set; }
+        public required string UserEmail { get; set; }
+    }
 }
