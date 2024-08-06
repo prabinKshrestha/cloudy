@@ -14,6 +14,10 @@ public static class Configuration
             accounts.AddCommand<ListAccountCommand>("ls")
                     .WithAlias("list")
                     .WithDescription("Lists all accounts with their names.");
+
+            accounts.AddCommand<AddAccountCommand>("a")
+                    .WithAlias("add")
+                    .WithDescription("Add account.");
         });
     }
 }
